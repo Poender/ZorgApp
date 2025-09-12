@@ -37,6 +37,7 @@ class Doctor extends User.Medical {
         if (newWeightScan.isEmpty()) { newWeight = Administration.currentPatient.getWeight();
         } else { newWeight = Double.parseDouble(newWeightScan); }
         System.out.format("Lung capacity (%.2f liter):\t", Administration.currentPatient.getLungCap());
+        System.out.format("poep capacity (%.2f liter):\t", Administration.currentPatient.getLungCap());
         String newLungCapScan = scanner.nextLine();
         double newLungCap; if (newLungCapScan.isEmpty()) {
             newLungCap = Administration.currentPatient.getLungCap();
