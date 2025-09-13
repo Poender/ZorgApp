@@ -126,7 +126,7 @@ public class Administration {
             System.out.format("%d:  View patient data\n", VIEW);
             System.out.format("%d:  Edit patient data\n", EDIT);
             if (currentUser instanceof Pharmacist) {
-                System.out.format("%d:  Manage medicines\n |\n", CONSULT);
+                System.out.format("%d:  Manage medicine storage\n |\n", CONSULT);
             } else {
                 System.out.format("%d:  Add new consult\n |\n", CONSULT);
             }

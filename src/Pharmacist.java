@@ -23,35 +23,6 @@ class Pharmacist extends User.nonMedical {
             }
         }
     }
-    @Override
-    public void editPatientData() {
-        super.editPatientData();
-        // ONLY subclasses from User.Medical + pharmacist can edit patient medication
-        var scanner = new Scanner(System.in);
-        for (String med : Administration.currentMeds.getAttributes().keySet()) {
-            // If currentDose == null, make it 0.0
-            Double currentDose = 0.0;
-            if (Administration.currentPatient.getMeds().get(med) == null) {
-                currentDose = 0.0;
-            } else {
-                currentDose = Administration.currentPatient.getMeds().get(med);
-            }
-
-            System.out.format("%.2f gr %s (%.2f gr in stock):\t", currentDose, med, Administration.currentMeds.getAttributes().get(med));
-            String newMedScan = scanner.nextLine();
-            Double newDose = currentDose;
-            if (!newMedScan.isEmpty()) {
-                newDose = Double.parseDouble(newMedScan);
-                // Check availability in currentMeds
-                if (newDose - currentDose < Administration.currentMeds.getAttributes().get(med)) {
-                    Administration.currentMeds.getAttributes().put(med, Administration.currentMeds.getAttributes().get(med) + currentDose - newDose);
-                    Administration.currentPatient.setMeds(med, newDose);
-                } else {
-                    System.out.format("Not enough %s available!\n", med);
-                }
-            }
-        }
-    }
 
     public void editMedStorage() {
         System.out.format("\n====| EDIT MEDICINES |%s| Logged in as: %s %s |==\n", "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
