@@ -13,7 +13,7 @@ class Pharmacist extends User.nonMedical {
         if (!Administration.currentPatient.getMeds().isEmpty()) {
             System.out.format("\n%-17s \n", "Medication usage:");
             for (String med : Administration.currentPatient.getMeds().keySet()) {
-                Double dosage = 0.0;
+                Double dosage;
                 if (Administration.currentPatient.getMeds().get(med) != null) {
                     dosage = Administration.currentPatient.getMeds().get(med);
                 } else {
