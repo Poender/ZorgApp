@@ -10,13 +10,18 @@ public class ZorgApp {
         while (currentUser == null){
             currentUser = authentication.logIn();
         }
-        Administration administration = new Administration(currentUser);
+        MedStorage medStorage = new MedStorage();
+        Administration administration = new Administration(currentUser, medStorage);
+
         administration.menu();
     }
 }
 
 // powerpoint: access levels gedaan inheritance en intcalc
 // powerpoint: consults gedaan, uitleg
+// powerpoint: lung capacity toegevoegd
+// pp: git aangemaakt en github
+
 // vragen: wat moet er in die consulten staan?
 //         private setters?
 //         abstract functions

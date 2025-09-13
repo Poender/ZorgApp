@@ -17,7 +17,7 @@ class Doctor extends User.Medical {
             System.out.format("%-17s %.2f liter\n", "Lung capacity:", Administration.currentPatient.getLungCap());
         }
         if (Administration.currentPatient.getConsults() != null) {
-            System.out.format("\n%-17s \n", "All consult history:");
+            System.out.format("\n%-17s \n", "ALL consult history:");
             for (Consult consult : Administration.currentPatient.getConsults()) {
                 System.out.format("> %s\n", consult.getAllDetails());
             }
@@ -37,7 +37,6 @@ class Doctor extends User.Medical {
         if (newWeightScan.isEmpty()) { newWeight = Administration.currentPatient.getWeight();
         } else { newWeight = Double.parseDouble(newWeightScan); }
         System.out.format("Lung capacity (%.2f liter):\t", Administration.currentPatient.getLungCap());
-        System.out.format("poep capacity (%.2f liter):\t", Administration.currentPatient.getLungCap());
         String newLungCapScan = scanner.nextLine();
         double newLungCap; if (newLungCapScan.isEmpty()) {
             newLungCap = Administration.currentPatient.getLungCap();

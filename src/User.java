@@ -34,7 +34,27 @@ public abstract class User {
     public void editPatientData() {
         System.out.format("\n====| EDIT PATIENT |%s| Logged in as: %s %s |==", "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
         System.out.println("\nLeave blank to retain the current value\n");
+        var scanner = new Scanner(System.in);
+        System.out.format("First name (%s):\t", Administration.currentPatient.getFirstName());
+        String newFirstName = scanner.nextLine(); if (newFirstName.isEmpty()) { newFirstName = Administration.currentPatient.getFirstName(); }
+        System.out.format("Surname (%s):\t", Administration.currentPatient.getSurname());
+        String newSurname = scanner.nextLine(); if (newSurname.isEmpty()) { newSurname = Administration.currentPatient.getSurname(); }
+
+        System.out.format("Gender (%s):\t", Administration.currentPatient.getGender());
+        String newGenderScan = scanner.nextLine(); char newGender;
+        if (newGenderScan.isEmpty()) { newGender = Administration.currentPatient.getGender();
+        } else { newGender = newGenderScan.charAt(0);
+        }
+
+        System.out.format("Date of birth (%s):\t", Administration.currentPatient.getDateOfBirth());
+        String newDateOfBirthScan = scanner.nextLine(); LocalDate newDateOfBirth;
+        if (newDateOfBirthScan.isEmpty()) { newDateOfBirth = Administration.currentPatient.getDateOfBirth();
+        } else { newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
+        }
+
+        Administration.currentPatient.updatePatient(Administration.currentPatient,newSurname,newFirstName,newGender,newDateOfBirth,null,null, 0.0);
     }
+
     public void addPatient() {
         System.out.format("\n====| ADD PATIENT |%s| Logged in as: %s %s |==\n", "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
         var scanner = new Scanner(System.in);
@@ -63,7 +83,9 @@ public abstract class User {
     public int getPin() { return pin; }
     public String getUserName() { return userName; }
     public String getRole() { return role;}
+
     public void createConsult() { }
+    public void editMeds() { }
 
     public void setRole(String role) { this.role = role;}
     /**
@@ -103,30 +125,6 @@ public abstract class User {
             String consultDetails = scanner.nextLine();
             Administration.currentPatient.addConsult(new Consult(LocalDate.now(), Administration.currentUser, consultDetails));
         }
-
-        @Override
-        public void editPatientData() {
-            super.editPatientData();
-            var scanner = new Scanner(System.in);
-            System.out.format("First name (%s):\t", Administration.currentPatient.getFirstName());
-            String newFirstName = scanner.nextLine(); if (newFirstName.isEmpty()) { newFirstName = Administration.currentPatient.getFirstName(); }
-            System.out.format("Surname (%s):\t", Administration.currentPatient.getSurname());
-            String newSurname = scanner.nextLine(); if (newSurname.isEmpty()) { newSurname = Administration.currentPatient.getSurname(); }
-
-            System.out.format("Gender (%s):\t", Administration.currentPatient.getGender());
-            String newGenderScan = scanner.nextLine(); char newGender;
-            if (newGenderScan.isEmpty()) { newGender = Administration.currentPatient.getGender();
-            } else { newGender = newGenderScan.charAt(0);
-            }
-
-            System.out.format("Date of birth (%s):\t", Administration.currentPatient.getDateOfBirth());
-            String newDateOfBirthScan = scanner.nextLine(); LocalDate newDateOfBirth;
-            if (newDateOfBirthScan.isEmpty()) { newDateOfBirth = Administration.currentPatient.getDateOfBirth();
-            } else { newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
-            }
-
-            Administration.currentPatient.updatePatient(Administration.currentPatient,newSurname,newFirstName,newGender,newDateOfBirth,null,null, 0.0);
-        }
     }
 
     // abstract want er worden geen objecten van gemaakt
@@ -134,9 +132,6 @@ public abstract class User {
         public nonMedical(int id, String userName, int pin) {
             super(id, userName, pin);
             setRole("nonMedical");
-        }
-        public void editPatientData() {
-            super.editPatientData();
         }
     }
 

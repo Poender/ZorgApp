@@ -22,15 +22,18 @@ public class Administration {
     static final int LIST = 5;
     static final int ADD = 6;
 
-    static ArrayList<Patient> patientArray = new ArrayList<>();
+    static ArrayList<Patient> patientArray;
     static Patient currentPatient;            // The currently selected patient
     static User currentUser;               // the current user of the program.
+    static MedStorage currentMeds;
 
     /**
      * Constructor
      */
-    Administration(User user) {
+    Administration(User user, MedStorage medStorage) {
         currentUser = user;
+        currentMeds = medStorage;
+        patientArray = new ArrayList<>();
 
         // Load ALL patients from file into patientArray
         try {
@@ -122,7 +125,11 @@ public class Administration {
             */
             System.out.format("%d:  View patient data\n", VIEW);
             System.out.format("%d:  Edit patient data\n", EDIT);
-            System.out.format("%d:  Add new consult\n |\n", CONSULT);
+            if (currentUser instanceof Pharmacist) {
+                System.out.format("%d:  Manage medicines\n |\n", CONSULT);
+            } else {
+                System.out.format("%d:  Add new consult\n |\n", CONSULT);
+            }
             System.out.format("%d:  Search patients\n", SEARCH);
             System.out.format("%d:  List all patients\n", LIST);
             System.out.format("%d:  Add new patient\n", ADD);
@@ -159,7 +166,11 @@ public class Administration {
                     break;
 
                 case CONSULT:
-                    currentUser.createConsult();
+                    if (currentUser instanceof Pharmacist) {
+                        currentUser.editMeds();
+                    } else {
+                        currentUser.createConsult();
+                    }
                     break;
 
                 default:
