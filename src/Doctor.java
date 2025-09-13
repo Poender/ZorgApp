@@ -10,7 +10,7 @@ class Doctor extends User.Medical {
     @Override
     public void viewData() {
         super.viewData();
-        System.out.format("%-17s %s\n", "Height:", Administration.currentPatient.getHeight() + " cm");
+        System.out.format("\n%-17s %s\n", "Height:", Administration.currentPatient.getHeight() + " cm");
         System.out.format("%-17s %s\n", "Weight:", Administration.currentPatient.getWeight() + " kg");
         System.out.format("%-17s %.1f\n", "BMI:", Administration.currentPatient.getBMI());
         if (Administration.currentPatient.getLungCap() != null) {

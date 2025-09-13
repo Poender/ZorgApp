@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class ZorgApp {
     public static void main(String[] args) {
@@ -21,6 +20,7 @@ public class ZorgApp {
 // powerpoint: consults gedaan, uitleg
 // powerpoint: lung capacity toegevoegd
 // pp: git aangemaakt en github
+// medication toegevoegd en pharmacy
 
 // vragen: wat moet er in die consulten staan?
 //         private setters?

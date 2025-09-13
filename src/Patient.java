@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 class Patient {
@@ -17,6 +18,8 @@ class Patient {
     private Double          weight;
     private Double          bmi;
     private Double          lungCap;
+
+    private HashMap<String, Double> medsMap;
     private ArrayList<String> bmiLog;
     private ArrayList<Consult> consults;
 
@@ -28,14 +31,15 @@ class Patient {
         this.id = id;
         this.surname = surname;
         this.firstName = firstName;
-        this.gender = 'm';
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.height = height;
         this.weight = weight;
         if (this.weight != null || this.height != null) {
             this.bmiLog = bmiLog;
-            this.bmi = getBMI();
+            bmi = getBMI();
         }
+        medsMap = new HashMap<>();
         //this.setBMILog();
     }
 
@@ -129,7 +133,7 @@ class Patient {
         return (LocalDate.now().toEpochDay() - getDateOfBirth().toEpochDay())/365;
     }
 
-    // Consults
+    // Consults get/set
     public ArrayList<Consult> getConsults() {
         return consults;
     }
@@ -138,6 +142,14 @@ class Patient {
             consults = new ArrayList<Consult>();
         }
         consults.add(consult);
+    }
+
+    // Medication get/set
+    public HashMap<String, Double> getMeds() {
+        return medsMap;
+    }
+    public void setMeds(String key, Double value) {
+        medsMap.put(key, value);
     }
 
     // GETTERS:

@@ -167,7 +167,7 @@ public class Administration {
 
                 case CONSULT:
                     if (currentUser instanceof Pharmacist) {
-                        currentUser.editMeds();
+                        currentUser.editMedStorage();
                     } else {
                         currentUser.createConsult();
                     }

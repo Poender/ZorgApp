@@ -85,7 +85,7 @@ public abstract class User {
     public String getRole() { return role;}
 
     public void createConsult() { }
-    public void editMeds() { }
+    public void editMedStorage() { }
 
     public void setRole(String role) { this.role = role;}
     /**
@@ -116,6 +116,22 @@ public abstract class User {
             super(id, userName, pin);
             setRole("Medical");
         }
+        @Override
+        void viewData(){
+            super.viewData();
+            if (!Administration.currentPatient.getMeds().isEmpty()) {
+                System.out.format("\n%-17s \n", "Medication usage:");
+                for (String med : Administration.currentPatient.getMeds().keySet()) {
+                    Double dosage = 0.0;
+                    if (Administration.currentPatient.getMeds().get(med) != null) {
+                        dosage = Administration.currentPatient.getMeds().get(med);
+                    } else {
+                        dosage = 0.0;
+                    }
+                    System.out.format("> %.2f gr %s\n", dosage, med);
+                }
+            }
+        }
 
         @Override
         public void createConsult() {
@@ -124,6 +140,37 @@ public abstract class User {
             System.out.print("\nEnter consult details:\n- ");
             String consultDetails = scanner.nextLine();
             Administration.currentPatient.addConsult(new Consult(LocalDate.now(), Administration.currentUser, consultDetails));
+        }
+
+        @Override
+        public void editPatientData() {
+            super.editPatientData();
+            var scanner = new Scanner(System.in);
+            for (String med : Administration.currentMeds.getAttributes().keySet()) {
+
+                // If currentDose == null, make it 0.0
+                Double currentDose = 0.0;
+                if (Administration.currentPatient.getMeds().get(med) == null) {
+                    currentDose = 0.0;
+                } else {
+                    currentDose = Administration.currentPatient.getMeds().get(med);
+                }
+
+                System.out.format("%.2f gr %s (%.2f gr in stock):\t", currentDose, med, Administration.currentMeds.getAttributes().get(med));
+                String newMedScan = scanner.nextLine();
+                Double newDose = currentDose;
+                if (!newMedScan.isEmpty()) {
+                    newDose = Double.parseDouble(newMedScan);
+                    // Check availability in currentMeds
+                    if (newDose - currentDose < Administration.currentMeds.getAttributes().get(med)) {
+                        Administration.currentMeds.getAttributes().put(med, Administration.currentMeds.getAttributes().get(med) + currentDose - newDose);
+                        Administration.currentPatient.setMeds(med, newDose);
+                    } else {
+                        System.out.format("Not enough %s available!\n", med);
+                    }
+                }
+
+            }
         }
     }
 
