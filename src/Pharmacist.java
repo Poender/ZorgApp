@@ -53,8 +53,7 @@ class Pharmacist extends User.nonMedical {
                 Double newStock = scanner.nextDouble();
                 Administration.currentMeds.setAttribute(newMedName, newStock);
                 System.out.format("Add more new medicines? (y/n): ");
-            }
-            if (choice == 'n') {
+            } else {
                 break;
             }
         }

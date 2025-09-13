@@ -1,12 +1,39 @@
-# ZorgApp, initial code.
+# ZorgApp, 2025.
 
-ZorgApp ADSD by Poender, team vanPuffelen&Friends .
+ZorgApp ADSD by Poender, team vanPuffelen&Friends.
 
-Dit project kan verder uitgebreid worden met de wensen en eisen zoals beschreven in de Product Backlog.
+## Inheritance:
+  
+    * User
+    *  * Medical
+    *  *  * Doctor
+    *  *  * Dentist
+    *  *  * Fysio, andere zorgverleners etc
+    *
+    *  *  NON-medical
+    *  *  * Pharmacist
+    *  *  * Balie medewerkers, verzekeraars etc
+  
+## Features:
 
-* ZorgApp: dit is het beginpunt van de applicatie
-* Administration: hier wordt het hoofdmenu geregeld
-* Patient: deze class is verantwoordelijk voor het weergeven van patiëntgegevens
-* User: dit is de ingelogde gebruiker
+* Users can `view`&`edit` **patient data**.
+* Users can `add` **new patients**. 
+  * Users can only view/edit data relevant to their profession.
+  * Doctors can view/edit everything.
 
-Work in progress ...
+
+
+* Medical users can `view`&`add` **consults**.
+  * Users can only view consults of same profession
+  * Doctors can view everything.
+* Medical users can `edit` patient **medicine** data.
+
+
+* Pharmacists can `edit` **available** medication.
+* Pharmacists can `add` **new** medication.
+
+
+
+
+
+### Work in progress ...
