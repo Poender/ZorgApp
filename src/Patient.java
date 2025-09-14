@@ -1,15 +1,10 @@
-import java.io.FileWriter;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Patient implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final Integer   id;
     private String          surname;
     private String          firstName;
@@ -68,63 +63,6 @@ public class Patient implements Serializable {
             Administration.currentPatient = patient;
         }
         Serializer.serializePatient(patient);
-        patient.writePatient();
-    }
-
-    private void writePatient() {
-        Path patientPath = Paths.get("patientData.db");
-        try {
-            List<String> lines = Files.readAllLines(patientPath);
-            FileWriter fileWriter = new FileWriter("temp.db", true);
-
-            // Write other patients to temp DB
-            for (String line : lines) {
-                if (Integer.parseInt(line.split(",")[0]) != getPatientID()) {
-                    fileWriter.write(line + "\n");
-                }
-            }
-            // Append this patient to temp DB
-            fileWriter.write(getPatientID() + "," +
-                    getSurname() + "," +
-                    getFirstName() + "," +
-                    getGender() + "," +
-                    getDateOfBirth() + "," +
-                    getHeight() + "," +
-                    getWeight() + "," +
-                    getBMILog() + "\n");
-            fileWriter.close();
-
-            // Overwrite old patient DB with temp DB
-            Path tempPath = Paths.get("temp.db");
-            Files.move(tempPath, patientPath, StandardCopyOption.REPLACE_EXISTING);
-
-        } catch (Exception e) {
-            System.err.println("ERROR writing to file");
-        }
-    }
-
-    public static Patient readPatient(int id) {
-        Path filePath = Paths.get("patientData.db");
-        try {
-            List<String> lines = Files.readAllLines(filePath);
-            for (String line : lines) {
-                if (Integer.parseInt(line.split(",")[0]) == id) {
-                    ArrayList<String> bmiLog = new ArrayList<>();
-                    bmiLog.add(line.split(",")[7].replace("[", "").replace ("]", ""));
-                    return new Patient(id,
-                            line.split(",")[1],
-                            line.split(",")[2],
-                            line.split(",")[3].charAt(0),
-                            LocalDate.parse(line.split(",")[4]),
-                            Double.parseDouble(line.split(",")[5]),
-                            Double.parseDouble(line.split(",")[6]),
-                            bmiLog);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("ERROR reading from file");
-        }
-        return null;
     }
 
     String fullName() {

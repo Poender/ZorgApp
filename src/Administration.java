@@ -1,7 +1,5 @@
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -37,13 +35,13 @@ public class Administration {
 
         // Load ALL patients from file into patientArray
         try {
-            Path filePath = Paths.get("patientData.db");
-            long linesCount = Files.lines(filePath).count();
-            for (int i = 1; i <= linesCount; i++) {
-                patientArray.add(Patient.readPatient(i));
+            File folder = new File("data/patient");
+            File[] files = folder.listFiles();
+            for (File file : files) {
+                patientArray.add(Serializer.deserializePatient(file.getName()));
             }
         } catch (Exception e) {
-            System.err.println("ERROR reading from file");
+            System.err.println("ERROR - Cannot load patient data");
         }
     }
 

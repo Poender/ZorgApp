@@ -9,20 +9,21 @@ public class Serializer {
             streamOut.writeObject(patient);
             streamOut.close(); fileOut.close();
         } catch (IOException i) {
+            i.printStackTrace();
             System.err.println("ERROR - Cannot serialize " + patient.toString());
         }
     }
 
-    public static Patient deserializePatient(Patient patient) {
+    public static Patient deserializePatient(String fileName) {
         try {
-            FileInputStream fileIn = new FileInputStream("data/patient/p" + patient.getPatientID() + ".ser");
+            FileInputStream fileIn = new FileInputStream("data/patient/" + fileName);
             ObjectInputStream streamIn = new ObjectInputStream(fileIn);
-            patient = (Patient) streamIn.readObject();
+            Patient patient = (Patient) streamIn.readObject();
             streamIn.close(); fileIn.close();
             return patient;
         } catch (IOException i) {
             i.printStackTrace();
-            System.err.println("ERROR - Cannot deserialize " + patient.toString());
+            System.err.println("ERROR - Cannot deserialize " + fileName);
             return null;
         } catch (ClassNotFoundException e) {
             System.err.println("ERROR - Patient Class not found");

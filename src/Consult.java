@@ -1,6 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Consult {
+public class Consult implements Serializable {
+    private static final long serialVersionUID = 1L;
     private final LocalDate date;
     private final User user;
     private final String details;

@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,7 +10,9 @@ import java.util.List;
 import java.util.Scanner;
 
 // abstract want er worden geen objects van gemaakt
-public abstract class User {
+public abstract class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final int id;
     private final String userName;
     private final int pin;
@@ -140,6 +143,7 @@ public abstract class User {
             System.out.print("\nEnter consult details:\n- ");
             String consultDetails = scanner.nextLine();
             Administration.currentPatient.addConsult(new Consult(LocalDate.now(), Administration.currentUser, consultDetails));
+            Serializer.serializePatient(Administration.currentPatient);
         }
 
         @Override
