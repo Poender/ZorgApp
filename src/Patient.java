@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-class Patient {
+public class Patient implements Serializable {
     private final Integer   id;
     private String          surname;
     private String          firstName;
@@ -66,6 +67,7 @@ class Patient {
             // Switch to new patient
             Administration.currentPatient = patient;
         }
+        Serializer.serializePatient(patient);
         patient.writePatient();
     }
 

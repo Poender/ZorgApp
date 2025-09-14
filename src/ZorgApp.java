@@ -20,7 +20,9 @@ public class ZorgApp {
 // powerpoint: consults gedaan, uitleg
 // powerpoint: lung capacity toegevoegd
 // pp: git aangemaakt en github
-// medication toegevoegd en pharmacy
+// medication toegevoegd en pharmacy werkend
+// readme aangepast
+
 
 // vragen: wat moet er in die consulten staan?
 //         private setters?
