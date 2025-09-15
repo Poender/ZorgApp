@@ -38,6 +38,7 @@ class Pharmacist extends User.nonMedical {
             Administration.currentMeds.setAttribute(med, newDose);
         }
         addMedsToStorage();
+        Serializer.serializeMeds(Administration.currentMeds);
     }
 
     public void addMedsToStorage() {

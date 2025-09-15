@@ -9,8 +9,8 @@ public class Serializer {
             streamOut.writeObject(patient);
             streamOut.close(); fileOut.close();
         } catch (IOException i) {
-            i.printStackTrace();
-            System.err.println("ERROR - Cannot serialize " + patient.toString());
+//            i.printStackTrace();
+            System.err.println("ERROR - Cannot serialize " + patient);
         }
     }
 
@@ -22,7 +22,7 @@ public class Serializer {
             streamIn.close(); fileIn.close();
             return patient;
         } catch (IOException i) {
-            i.printStackTrace();
+//            i.printStackTrace();
             System.err.println("ERROR - Cannot deserialize " + fileName);
             return null;
         } catch (ClassNotFoundException e) {
@@ -38,24 +38,55 @@ public class Serializer {
             streamOut.writeObject(user);
             streamOut.close(); fileOut.close();
         } catch (IOException i) {
-            System.err.println("ERROR - Cannot serialize " + user.toString());
+            //            i.printStackTrace();
+            System.err.println("ERROR - Cannot serialize " + user);
         }
     }
 
-    public static User deserializeUser(User user) {
+    public static User deserializeUser(String fileName) {
         try {
-            FileInputStream fileIn = new FileInputStream("data/user/u" + user.getUserID() + ".ser");
+            FileInputStream fileIn = new FileInputStream("data/user/" + fileName);
             ObjectInputStream streamIn = new ObjectInputStream(fileIn);
-            user = (User) streamIn.readObject();
+            User user = (User) streamIn.readObject();
             streamIn.close(); fileIn.close();
             return user;
         } catch (IOException i) {
-            i.printStackTrace();
-            System.err.println("ERROR - Cannot deserialize " + user.toString());
+//            i.printStackTrace();
+            System.err.println("ERROR - Cannot deserialize " + fileName);
             return null;
         } catch (ClassNotFoundException e) {
-            System.err.println("ERROR - Patient Class not found");
+            System.err.println("ERROR - User Class not found");
             return null;
         }
     }
+
+    public static void serializeMeds(MedStorage medStorage) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("data/medstorage.ser");
+            ObjectOutputStream streamOut = new ObjectOutputStream(fileOut);
+            streamOut.writeObject(medStorage);
+            streamOut.close(); fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+            System.err.println("ERROR - Cannot serialize " + medStorage);
+        }
+    }
+
+    public static MedStorage deserializeMeds() {
+        try {
+            FileInputStream fileIn = new FileInputStream("data/medstorage.ser");
+            ObjectInputStream streamIn = new ObjectInputStream(fileIn);
+            MedStorage medStorage = (MedStorage) streamIn.readObject();
+            streamIn.close(); fileIn.close();
+            return medStorage;
+        } catch (IOException i) {
+//            i.printStackTrace();
+            System.err.println("ERROR - Cannot deserialize medstorage.ser");
+            return null;
+        } catch (ClassNotFoundException e) {
+            System.err.println("ERROR - MedStorage Class not found");
+            return null;
+        }
+    }
+
 }

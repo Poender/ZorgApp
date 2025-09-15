@@ -173,8 +173,8 @@ public abstract class User implements Serializable {
                         System.out.format("Not enough %s available!\n", med);
                     }
                 }
-
             }
+            Serializer.serializeMeds(Administration.currentMeds);
         }
     }
 

@@ -1,6 +1,9 @@
+import java.io.File;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class MedStorage {
+public class MedStorage implements Serializable {
+
     private HashMap<String, Double> medStorageAttributes = new HashMap<>();
 
     MedStorage() {

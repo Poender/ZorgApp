@@ -1,3 +1,4 @@
+import java.io.File;
 
 public class ZorgApp {
     public static void main(String[] args) {
@@ -9,9 +10,15 @@ public class ZorgApp {
         while (currentUser == null){
             currentUser = authentication.logIn();
         }
-        MedStorage medStorage = new MedStorage();
-        Administration administration = new Administration(currentUser, medStorage);
 
+        // Create new medStorage, overwrite if already exists in medstorage.ser file
+        MedStorage medStorage = new MedStorage();
+        File medFile = new File("data/medstorage.ser");
+        if (medFile.isFile()) {
+            medStorage = Serializer.deserializeMeds();
+        }
+
+        Administration administration = new Administration(currentUser, medStorage);
         administration.menu();
     }
 }
@@ -22,6 +29,8 @@ public class ZorgApp {
 // pp: git aangemaakt en github
 // medication toegevoegd en pharmacy werkend
 // readme aangepast
+// komma file naar objeccbject streaminf
+
 
 
 // vragen: wat moet er in die consulten staan?

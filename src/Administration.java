@@ -31,9 +31,9 @@ public class Administration {
     Administration(User user, MedStorage medStorage) {
         currentUser = user;
         currentMeds = medStorage;
-        patientArray = new ArrayList<>();
 
         // Load ALL patients from file into patientArray
+        patientArray = new ArrayList<>();
         try {
             File folder = new File("data/patient");
             File[] files = folder.listFiles();
@@ -45,7 +45,7 @@ public class Administration {
         }
     }
 
-    static void searchPatient() {
+    void searchPatient() {
         System.out.flush();
         System.out.format("\n====| SEARCH PATIENT |%s| Logged in as: %s %s |==", "=".repeat(50), currentUser.getRole(), currentUser.getUserName());
         var scanner = new Scanner(System.in);
@@ -85,7 +85,7 @@ public class Administration {
         }
     }
 
-    static void listPatients() {
+    void listPatients() {
         System.out.flush();
         System.out.format("===== CHOOSE PATIENT ==============================\n");
         System.out.format("%s \t\t %s\n", "ID", "Name:");
@@ -109,7 +109,7 @@ public class Administration {
             }
     }
 
-    static void menu() {
+    void menu() {
         while (currentPatient == null) {
             searchPatient();
         }
