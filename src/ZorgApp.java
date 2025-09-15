@@ -11,7 +11,7 @@ public class ZorgApp {
             currentUser = authentication.logIn();
         }
 
-        // Create new medStorage, overwrite if already exists in medstorage.ser file
+        // Create new medStorage or load existing if already exists as medstorage.ser
         MedStorage medStorage = new MedStorage();
         File medFile = new File("data/medstorage.ser");
         if (medFile.isFile()) {

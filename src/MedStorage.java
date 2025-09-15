@@ -7,7 +7,6 @@ public class MedStorage implements Serializable {
 
     private HashMap<String, Double> medStorageAttributes = new HashMap<>();
 
-    // Constructor only if using meds for first time, and medstorage.ser is not available
     MedStorage() {
         medStorageAttributes.put("Paracetamol", 100.0);
         medStorageAttributes.put("Diclofenac", 100.0);

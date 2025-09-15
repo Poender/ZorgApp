@@ -75,7 +75,13 @@ public class Administration {
                 }
                 Scanner sc = new Scanner(System.in);
                 System.out.format("\nPlease enter patient ID: ");
-                int inputID = sc.nextInt();
+
+                int inputID = 0;
+                if (sc.hasNextInt()) {
+                    inputID = sc.nextInt();
+                } else {
+                    System.out.println("ERROR - Please enter a patient digit");
+                }
                 for (Patient patient : searchResults) {
                     if (patient.getPatientID() == inputID) {
                         currentPatient = patient;

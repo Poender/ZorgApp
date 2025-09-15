@@ -28,6 +28,8 @@ public class Authentication {
         Scanner sc = new Scanner(System.in);
         System.out.print("Username: ");
         String userName = sc.nextLine();
+        if (userName.isEmpty()) {userName = "null";}
+
         System.out.print("Pin: ");
         while (!sc.hasNextInt()) {
             System.out.println("Pin can only be digits!");
