@@ -45,16 +45,16 @@ class Doctor extends User.Medical {
 
         Administration.currentPatient.updatePatient(Administration.currentPatient,null,null,null,null,newHeight,newWeight, newLungCap);
         System.out.format("Update BMI? (y/n): ");
-        int choice;
-        if (!scanner.nextLine().isEmpty()) {
-            choice = scanner.nextLine().charAt(0);
-        } else {
-            choice = 'n';
+        String input; int choice = 'n';
+        if (!scanner.next().isEmpty()) {
+            input = scanner.nextLine();
+            if (!input.isEmpty()) {
+                choice = input.charAt(0);
+            }
         }
         if (choice == 'y') {
             Administration.currentPatient.setBMI();
             Administration.currentPatient.setBMILog();
-            Administration.currentPatient.updatePatient(Administration.currentPatient,null,null,null,null,newHeight,newWeight, newLungCap);
         }
     }
 }

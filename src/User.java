@@ -55,7 +55,7 @@ public abstract class User implements Serializable {
         } else { newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
         }
 
-        Administration.currentPatient.updatePatient(Administration.currentPatient,newSurname,newFirstName,newGender,newDateOfBirth,null,null, 0.0);
+        Administration.currentPatient.updatePatient(Administration.currentPatient,newSurname,newFirstName,newGender,newDateOfBirth,null,null, null);
     }
 
     public void addPatient() {
