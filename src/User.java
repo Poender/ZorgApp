@@ -188,7 +188,7 @@ public abstract class User implements Serializable {
 
 
     static User readUser(int id) {
-        Path filePath = Paths.get("userData.db");
+        Path filePath = Paths.get("data/user/userData.db");
         try {
             List<String> lines = Files.readAllLines(filePath);
             for (String line : lines) {

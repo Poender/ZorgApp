@@ -14,7 +14,7 @@ public class Authentication {
     public User logIn() {
         while (userArray.isEmpty()) {
             try {
-                Path filePath = Paths.get("userData.db");
+                Path filePath = Paths.get("data/user/userData.db");
                 long linesCount = Files.lines(filePath).count();
                 for (int i = 1; i <= linesCount; i++) {
                     userArray.add(User.readUser(i));
