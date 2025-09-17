@@ -1,4 +1,6 @@
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Set;
 
 //User is gesplit in medical en nonmedical
 class Pharmacist extends User.nonMedical {
@@ -27,11 +29,12 @@ class Pharmacist extends User.nonMedical {
     public void editMedStorage() {
         System.out.format("\n====| EDIT MEDICINES |%s| Logged in as: %s %s |==\n", "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
         var scanner = new Scanner(System.in);
-        for (String med : Administration.currentMeds.getAttributes().keySet()) {
-            System.out.format("%s (%.2f gr in stock):\t", med, Administration.currentMeds.getAttributes().get(med));
+        HashMap<String, Double> currentMeds = Serializer.deserializeMeds().getAttributes();
+        for (String med : currentMeds.keySet()) {
+            System.out.format("%s (%.2f gr in stock):\t", med, currentMeds.get(med));
             String newMedScan = scanner.nextLine(); double newDose;
             if (newMedScan.isEmpty()) {
-                newDose = Administration.currentMeds.getAttributes().get(med);
+                newDose = currentMeds.get(med);
             } else {
                 newDose = Double.parseDouble(newMedScan);
             }
@@ -53,7 +56,7 @@ class Pharmacist extends User.nonMedical {
                 System.out.format("How much in stock (gr): ");
                 Double newStock = scanner.nextDouble();
                 Administration.currentMeds.setAttribute(newMedName, newStock);
-                System.out.format("Add more new medicines? (y/n): ");
+                System.out.format("Add another new medicine? (y/n): ");
             } else {
                 break;
             }

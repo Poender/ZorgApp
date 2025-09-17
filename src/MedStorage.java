@@ -14,12 +14,17 @@ public class MedStorage implements Serializable {
         medStorageAttributes.put("Antibiotics", 100.0);
     }
 
+    // GET&SET
     public HashMap<String, Double> getAttributes() {
         return medStorageAttributes;
     }
 
     public void setAttribute(String key, Double value) {
-        medStorageAttributes.put(key, value);
+        if (value != 0){
+            medStorageAttributes.put(key, value);
+        } else {
+            medStorageAttributes.remove(key);
+        }
     }
 }
 

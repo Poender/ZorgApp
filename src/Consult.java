@@ -14,7 +14,7 @@ public class Consult implements Serializable {
     }
 
     public String getAllDetails() {
-        return date + " - @" + user.getRole() + " " + user.getUserName() + "\t\t| Notes: " + details;
+        return date + " - @" + user.getRole() + " " + user.getUserName() + "\t| Notes: " + details;
     }
     public User getUser() {
         return user;

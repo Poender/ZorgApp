@@ -20,6 +20,7 @@ class Doctor extends User.Medical {
             System.out.format("\n%-17s \n", "ALL consult history:");
             for (Consult consult : Administration.currentPatient.getConsults()) {
                 System.out.format("> %s\n", consult.getAllDetails());
+
             }
         }
     }
@@ -45,14 +46,17 @@ class Doctor extends User.Medical {
 
         Administration.currentPatient.updatePatient(Administration.currentPatient,null,null,null,null,newHeight,newWeight, newLungCap);
         System.out.format("Update BMI? (y/n): ");
-        String input; int choice = 'n';
-        if (!scanner.next().isEmpty()) {
-            input = scanner.nextLine();
-            if (!input.isEmpty()) {
-                choice = input.charAt(0);
+
+        String input;
+        while(true) {
+            input = scanner.nextLine().trim();
+            if (input.equals("y") || input.equals("n")) {
+                break;
+            } else {
+                System.out.format("Please enter y or n: ");
             }
         }
-        if (choice == 'y') {
+        if (input.equals("y")) {
             Administration.currentPatient.setBMI();
             Administration.currentPatient.setBMILog();
         }

@@ -19,6 +19,7 @@ public class Administration {
     static final int SEARCH = 4;
     static final int LIST = 5;
     static final int ADD = 6;
+    static final int REMOVE = 7;
 
     static ArrayList<Patient> patientArray;
     static Patient currentPatient;            // The currently selected patient
@@ -137,6 +138,7 @@ public class Administration {
             System.out.format("%d:  Search patients\n", SEARCH);
             System.out.format("%d:  List all patients\n", LIST);
             System.out.format("%d:  Add new patient\n", ADD);
+            System.out.format("%d:  Remove patient\n", REMOVE);
             System.out.format("\n%d:  LOG OUT\n", STOP);
             //System.out.format("\n%d:  STOP\n", STOP);
             System.out.print("\nEnter #choice: ");
@@ -175,6 +177,10 @@ public class Administration {
                     } else {
                         currentUser.createConsult();
                     }
+                    break;
+
+                case REMOVE:
+                    currentUser.removePatient();
                     break;
 
                 default:

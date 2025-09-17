@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.Serializable;
 import java.nio.file.Files;
@@ -26,7 +27,7 @@ public abstract class User implements Serializable {
     }
 
     void viewData() {
-        System.out.format("\n====| PATIENT ID: [%d] |%s| Logged in as: %s %s |==", id, "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
+        System.out.format("\n====| PATIENT ID: [%d] |%s| Logged in as: %s %s |==", Administration.currentPatient.getPatientID(), "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
         System.out.format("\n%-17s %s\n", "Surname:", Administration.currentPatient.getSurname());
         System.out.format("%-17s %s\n", "Name:", Administration.currentPatient.getFirstName());
         System.out.format("%-17s %s\n", "Gender:", Administration.currentPatient.getGender());
@@ -62,25 +63,58 @@ public abstract class User implements Serializable {
         System.out.format("\n====| ADD PATIENT |%s| Logged in as: %s %s |==\n", "=".repeat(50), Administration.currentUser.getRole(), Administration.currentUser.getUserName());
         var scanner = new Scanner(System.in);
         System.out.format("First name:\t\t\t- ");
-        String newFirstName = scanner.nextLine(); if (newFirstName.isEmpty()) { newFirstName = Administration.currentPatient.getFirstName(); }
+        String newFirstName = scanner.nextLine(); if (newFirstName.isEmpty()) { System.out.println("ERROR - Name cannot be empty!"); return; }
         System.out.format("Surname :\t\t\t- ");
-        String newSurname = scanner.nextLine(); if (newSurname.isEmpty()) { newSurname = Administration.currentPatient.getSurname(); }
+        String newSurname = scanner.nextLine(); if (newSurname.isEmpty()) {  System.out.println("ERROR - Surname cannot be empty!"); return;  }
 
         System.out.format("Gender:\t\t\t\t- ");
         String newGenderScan = scanner.nextLine(); char newGender;
-        if (newGenderScan.isEmpty()) { newGender = Administration.currentPatient.getGender();
+        if (newGenderScan.isEmpty()) {  System.out.println("ERROR - Gender cannot be empty!"); return;
         } else { newGender = newGenderScan.charAt(0);
         }
         System.out.format("Born (yyyy-mm-dd):\t- ");
-        String newDateOfBirthScan = scanner.nextLine(); LocalDate newDateOfBirth;
-        if (newDateOfBirthScan.isEmpty()) { newDateOfBirth = Administration.currentPatient.getDateOfBirth();
-        } else { newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
+        LocalDate newDateOfBirth;
+
+        String newDateOfBirthScan = scanner.nextLine();
+        if (newDateOfBirthScan.isEmpty()) {
+            System.out.println("ERROR - Date of birth cannot be empty!");
+            return;
+        }
+        try {
+            newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
+        } catch (Exception e) {
+            System.out.println("ERROR - Please enter date of birth as (yyyy-mm-dd)");
+            return;
         }
 
         // Create empty patient
         Patient newPatient = new Patient(Administration.patientArray.size() + 1, null, null,  null,null , 0.0, 0.0, new ArrayList<String>());
         Administration.currentPatient.updatePatient(newPatient,newSurname,newFirstName,newGender,newDateOfBirth,0.0,0.0, 0.0);
     }
+
+    public void removePatient() {
+        var scanner = new Scanner(System.in);
+        System.out.format("Remove patient %s %s? (y/n): ", Administration.currentPatient.getFirstName(), Administration.currentPatient.getSurname());
+
+        String input;
+        while(true) {
+            input = scanner.nextLine().trim();
+            if (input.equals("y") || input.equals("n")) {
+                break;
+            } else {
+                System.out.format("Please enter y or n: ");
+            }
+        }
+        if (input.equals("y")) {
+            File patientFile = new File("data/patient/p" + Administration.currentPatient.getPatientID() + ".ser");
+            System.out.println(patientFile);
+            Administration.patientArray.removeIf(patient -> patient.getPatientID() == Administration.currentPatient.getPatientID());
+            boolean delete = patientFile.delete();
+            System.out.println(delete);
+        }
+
+    }
+
 
     public int getUserID() { return id; }
     public int getPin() { return pin; }
@@ -162,7 +196,7 @@ public abstract class User implements Serializable {
 
                 System.out.format("%.2f gr %s (%.2f gr in stock):\t", currentDose, med, Administration.currentMeds.getAttributes().get(med));
                 String newMedScan = scanner.nextLine();
-                Double newDose = currentDose;
+                double newDose;
                 if (!newMedScan.isEmpty()) {
                     newDose = Double.parseDouble(newMedScan);
                     // Check availability in currentMeds

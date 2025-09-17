@@ -2,7 +2,7 @@ import java.io.File;
 
 public class ZorgApp {
     public static void main(String[] args) {
-        System.out.println("==| ZORG-APP BY LUCAS NIJSTAD |==\n");
+        System.out.println("==| ZORG-APP ADSD 2025 |==\n");
 
         // Auth object en login - is dit de juiste manier?
         Authentication authentication = new Authentication();
@@ -29,7 +29,7 @@ public class ZorgApp {
 // pp: git aangemaakt en github
 // medication toegevoegd en pharmacy werkend
 // readme aangepast
-// komma file naar objeccbject streaminf
+// komma file naar object streaming
 
 
 

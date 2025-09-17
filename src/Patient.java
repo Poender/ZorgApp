@@ -89,11 +89,19 @@ public class Patient implements Serializable {
         return medsMap;
     }
     public void setMeds(String key, Double value) {
-        medsMap.put(key, value);
+        if (value != 0) {
+            medsMap.put(key, value);
+        } else {
+            medsMap.remove(key);
+        }
     }
 
     // GETTERS:
-    public int getPatientID() {return id;}
+    public int getPatientID() {
+        return id;
+    }
+
+
     public String getFirstName() {return firstName;}
     public String getSurname() {return surname;}
     public Character getGender() {return gender;}
@@ -120,6 +128,7 @@ public class Patient implements Serializable {
         surname = surname.substring(0, 1).toUpperCase() + surname.substring(1);
         this.surname = surname;
     }
+
     private void setGender(Character gender) {
         if (gender == 'm' || gender == 'v' || gender == 'x') {
             this.gender = gender;
