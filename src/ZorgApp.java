@@ -30,6 +30,8 @@ public class ZorgApp {
 // medication toegevoegd en pharmacy werkend
 // readme aangepast
 // komma file naar object streaming
+// teamhandvaest gemaakt
+// sprint review gehad e niweuwew gepland
 
 
 

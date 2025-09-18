@@ -121,6 +121,9 @@ public class Administration {
             searchPatient();
         }
 
+        Graph graph = new Graph();
+        graph.showGraph(Administration.currentPatient);
+
         while(true) {
             System.out.flush();
             System.out.format("\n%s| Logged in as: %s %s |==", "=".repeat(70), currentUser.getRole(), currentUser.getUserName());

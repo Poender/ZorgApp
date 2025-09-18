@@ -67,7 +67,7 @@ public class Serializer {
             streamOut.writeObject(medStorage);
             streamOut.close(); fileOut.close();
         } catch (IOException i) {
-            i.printStackTrace();
+            //i.printStackTrace();
             System.err.println("ERROR - Cannot serialize " + medStorage);
         }
     }

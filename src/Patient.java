@@ -101,7 +101,6 @@ public class Patient implements Serializable {
         return id;
     }
 
-
     public String getFirstName() {return firstName;}
     public String getSurname() {return surname;}
     public Character getGender() {return gender;}
@@ -182,7 +181,7 @@ public class Patient implements Serializable {
     }
 
     void setBMI() {
-        bmi = weight/ ((height/100)*(height/100));
+        bmi = weight / ((height/100)*(height/100));
     }
 
     void setBMILog() {

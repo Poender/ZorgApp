@@ -220,7 +220,6 @@ public abstract class User implements Serializable {
         }
     }
 
-
     static User readUser(int id) {
         Path filePath = Paths.get("data/user/userData.db");
         try {

@@ -59,6 +59,7 @@ class Doctor extends User.Medical {
         if (input.equals("y")) {
             Administration.currentPatient.setBMI();
             Administration.currentPatient.setBMILog();
+            Serializer.serializePatient(Administration.currentPatient);
         }
     }
 }
