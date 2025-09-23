@@ -40,7 +40,8 @@ public abstract class User implements Serializable {
         System.out.println("\nLeave blank to retain the current value\n");
         var scanner = new Scanner(System.in);
         System.out.format("First name (%s):\t", Administration.currentPatient.getFirstName());
-        String newFirstName = scanner.nextLine(); if (newFirstName.isEmpty()) { newFirstName = Administration.currentPatient.getFirstName(); }
+        String newFirstName = scanner.nextLine();
+        if (newFirstName.isEmpty()) { newFirstName = Administration.currentPatient.getFirstName(); }
         System.out.format("Surname (%s):\t", Administration.currentPatient.getSurname());
         String newSurname = scanner.nextLine(); if (newSurname.isEmpty()) { newSurname = Administration.currentPatient.getSurname(); }
 
@@ -137,6 +138,8 @@ public abstract class User implements Serializable {
      *
      *  *  NON-medical
      *  *  * Pharma, balie medewerkers, ?verzekeraar? etc
+     *
+     *  klassendiagram
      *
      */
 

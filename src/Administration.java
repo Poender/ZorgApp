@@ -121,8 +121,8 @@ public class Administration {
             searchPatient();
         }
 
-        Graph graph = new Graph();
-        graph.showGraph(Administration.currentPatient);
+//        Graph graph = new Graph(0,0);
+//        graph.animateGraph();
 
         while(true) {
             System.out.flush();

@@ -23,6 +23,8 @@ class Doctor extends User.Medical {
 
             }
         }
+        Graph graph = new Graph(20,80);
+        graph.showGraph(Administration.currentPatient);
     }
 
     @Override
