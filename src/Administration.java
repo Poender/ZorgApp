@@ -121,8 +121,6 @@ public class Administration {
             searchPatient();
         }
 
-//        Graph graph = new Graph(0,0);
-//        graph.animateGraph();
 
         while(true) {
             System.out.flush();
@@ -148,6 +146,7 @@ public class Administration {
 //            try {
             var scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
+            Graph graph = new Graph(0,0);
             switch (choice) {
                 case STOP:
                     Authentication authentication = new Authentication();
@@ -185,6 +184,13 @@ public class Administration {
                 case REMOVE:
                     currentUser.removePatient();
                     break;
+
+                case 69:
+                    while(true) {
+                        graph.animateGraph();
+                    }
+                    break;
+
 
                 default:
                     System.err.println("Please enter a *valid* digit");

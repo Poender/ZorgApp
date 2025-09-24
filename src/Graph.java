@@ -172,6 +172,12 @@ public class Graph {
             System.out.println("\n\n"); i++;
             try { Thread.sleep(200); } catch (Exception e){};
         }
+        for (int i = 40; i > 7; i--) {
+            Graph graph = new Graph(i,i * 4);
+            graph.showGraph(Administration.currentPatient);
+            System.out.println("\n\n"); i--;
+            try { Thread.sleep(200); } catch (Exception e){};
+        }
 
     }
 }

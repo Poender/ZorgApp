@@ -52,9 +52,13 @@ public abstract class User implements Serializable {
         }
 
         System.out.format("Date of birth (%s):\t", Administration.currentPatient.getDateOfBirth());
-        String newDateOfBirthScan = scanner.nextLine(); LocalDate newDateOfBirth;
-        if (newDateOfBirthScan.isEmpty()) { newDateOfBirth = Administration.currentPatient.getDateOfBirth();
-        } else { newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
+
+        String newDateOfBirthScan = scanner.nextLine();
+        LocalDate newDateOfBirth;
+        if (newDateOfBirthScan.isEmpty()) {
+            newDateOfBirth = Administration.currentPatient.getDateOfBirth();
+        }
+        else { newDateOfBirth = LocalDate.parse(newDateOfBirthScan);
         }
 
         Administration.currentPatient.updatePatient(Administration.currentPatient,newSurname,newFirstName,newGender,newDateOfBirth,null,null, null);
