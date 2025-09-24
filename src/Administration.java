@@ -188,9 +188,8 @@ public class Administration {
                 case 69:
                     while(true) {
                         graph.animateGraph();
+                        break;
                     }
-                    break;
-
 
                 default:
                     System.err.println("Please enter a *valid* digit");
