@@ -188,7 +188,6 @@ public class Administration {
                 case 69:
                     while(true) {
                         graph.animateGraph();
-                        break;
                     }
 
                 default:
